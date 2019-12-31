@@ -1,0 +1,45 @@
+service: wdio-lambda
+# package:
+#   individually: true
+plugins:
+  - serverless-plugin-chrome
+  - serverless-offline
+  - serverless-offline-scheduler
+  - serverless-webpack
+provider:
+    name: aws
+    runtime: nodejs8.10
+    timeout: 300
+    region: us-east-2
+    # environment:
+    #   DEBUG: "*" # -- DON'T ADD THIS, DOESN'T PLAY NICE WITH LAMBDA
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js 
+    packExternalModulesMaxBuffer: 1000000
+    includeModules: true
+  chrome:
+    flags:
+      - --headless
+      - --window-size=1280,1696
+      - --hide-scrollbars
+      - --ignore-certificate-errors
+      - --disable-dev-shm-usage
+      - --disable-gpu
+      - --single-process
+      - --no-zygote
+      - --no-sandbox
+      - --disable-plugins
+      - --disable-extensions
+    functions:
+      - runTest
+      - helloChrome
+functions:
+  runTest:
+    handler: src/handler.runTest
+    memorySize: 1024
+    timeout: 60
+    events:
+      - http:
+          path: runTest
+          method: post
