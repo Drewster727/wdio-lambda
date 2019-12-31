@@ -8,4 +8,25 @@ Key concepts/learnings:
 - Having the appropriate chromedriver flags is very important
 - ...
 
+Commands:
+
+Run wdio
+```
+./node_modules/.bin/wdio ./configs/wdio.conf.js --spec ./test/**/e2e/specs/**/*.js
+```
+
+Run serverless offline
+```
+./node_modules/.bin/serverless offline
+```
+
+NPM Install / Package inside lambdaci/lambda container
+```
+rm -rf node_modules
+docker run -v $PWD:/var/task -w /var/task --entrypoint='sh' lambci/lambda:build-nodejs8.10 package.sh
+rm -rf ~/Desktop/sls_tmp
+cp -R .serverless/* ~/Desktop/sls_tmp/
+serverless deploy --package ~/Desktop/sls_tmp --force --aws-s3-accelerate
+```
+
 Lots of time has been spent making small changes. Everything works locally on my macbook.
