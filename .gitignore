@@ -65,3 +65,6 @@ typings/
 
 # wdio
 output/**/*.*
+
+# vscode
+.vscode
