@@ -37,7 +37,7 @@
     "@wdio/sync": "^5.17.0",
     "aws-sdk": "^2.596.0",
     "chrome-launcher": "^0.12.0",
-    "chromedriver": "2.43.4",
+    "chromedriver": "119.0.1",
     "geckodriver": "^1.19.1",
     "chrome-remote-interface": "^0.28.1",
     "chai": "^4.2.0",
